@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { deleteTodo } from "@/lib/api/todos";
+import { getTodo, updateTodo } from "@/lib/api/todos";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogTrigger,
@@ -20,45 +22,65 @@ type Props = {
 export function UpdateTodoButton({ id }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    if (!open) return;
+
+    const fetchTodo = async () => {
+      try {
+        const todo = await getTodo(id);
+        setTitle(todo.title || "");
+        setDescription(todo.description || "");
+      } catch (error) {
+        console.error("error:", error);
+      }
+    };
+
+    fetchTodo();
+  }, [open]);
 
   const handleUpdate = async () => {
-    setLoading(true);
     try {
-      await deleteTodo(id);
+      await updateTodo(id, { title, description });
       router.refresh();
       setOpen(false);
     } catch (error) {
       console.error("error:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Delete</Button>
+        <Button variant="default">Update</Button>
       </DialogTrigger>
 
       <DialogContent className="bg-gray-900">
         <DialogHeader>
-          <DialogTitle>
-            Weet je zeker dat je deze todo wilt verwijderen?
-          </DialogTitle>
+          <DialogTitle>Update to-do</DialogTitle>
         </DialogHeader>
+
+        <div className="space-y-4 py-2">
+          <Input
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <Textarea
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
 
         <DialogFooter className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setOpen(false)}>
-            Annuleer
+            Cancel
           </Button>
-          <Button
-            variant="destructive"
-            onClick={handleUpdate}
-            disabled={loading}
-            className="hover:border-amber-200"
-          >
-            {loading ? "update..." : "Update"}
+          <Button variant="default" onClick={handleUpdate}>
+            Update
           </Button>
         </DialogFooter>
       </DialogContent>

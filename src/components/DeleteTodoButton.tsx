@@ -20,18 +20,14 @@ type Props = {
 export function DeleteTodoButton({ id }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
-    setLoading(true);
     try {
       await deleteTodo(id);
       router.refresh();
       setOpen(false);
     } catch (error) {
       console.error("error:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -43,21 +39,15 @@ export function DeleteTodoButton({ id }: Props) {
 
       <DialogContent className="bg-gray-900">
         <DialogHeader>
-          <DialogTitle>
-            Weet je zeker dat je deze todo wilt verwijderen?
-          </DialogTitle>
+          <DialogTitle>Delete todo</DialogTitle>
         </DialogHeader>
 
         <DialogFooter className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setOpen(false)}>
-            Annuleer
+            Cancel
           </Button>
-          <Button
-            variant="destructive"
-            onClick={handleDelete}
-            disabled={loading}
-          >
-            {loading ? "Verwijderen..." : "Verwijder"}
+          <Button variant="destructive" onClick={handleDelete}>
+            Delete
           </Button>
         </DialogFooter>
       </DialogContent>

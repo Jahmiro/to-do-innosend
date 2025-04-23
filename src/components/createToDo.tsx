@@ -10,14 +10,12 @@ import { createTodo } from "@/lib/api/todos";
 export function CreateToDo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title) return;
 
-    setLoading(true);
     try {
       await createTodo({ title, description });
       setTitle("");
@@ -25,8 +23,6 @@ export function CreateToDo() {
       router.refresh();
     } catch (error) {
       console.error("error:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -53,8 +49,8 @@ export function CreateToDo() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <Button type="submit" variant="default" disabled={loading}>
-          {loading ? "Creating..." : "Send"}
+        <Button type="submit" variant="default">
+          Send
         </Button>
       </div>
     </form>

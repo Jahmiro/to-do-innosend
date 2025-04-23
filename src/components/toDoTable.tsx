@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/table";
 import { getTodos } from "@/lib/api/todos";
 import { DeleteTodoButton } from "./DeleteTodoButton";
+import { UpdateTodoButton } from "./updateToDo";
 
 export default async function ToDoTable() {
   const todos = await getTodos();
@@ -30,7 +31,7 @@ export default async function ToDoTable() {
             </TableCell>
             <TableCell>{todo.completed === false ? "Open" : "Done"}</TableCell>
             <TableCell className="text-right grid grid-cols-2 gap-2">
-              <DeleteTodoButton id={todo.id} />
+              <UpdateTodoButton id={todo.id} />
               <DeleteTodoButton id={todo.id} />
             </TableCell>
           </TableRow>

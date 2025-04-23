@@ -36,6 +36,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ### Functionaliteiten (Gelieve binnen een git repo te werken waarbij verschillende functionaliteiten in verschillende commits zijn terug te vinden)
+
 - **Dashboard Pagina** met alle to-dos
 - **Maak een nieuwe To-Do** (Formulier met validatie)
 - **Bewerk een bestaande To-Do**
@@ -43,7 +44,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - **Toggle Completion Status**
 
 ### Formuliervalidatie
+
 Voor formuliervalidatie zou je gebruik kunnen maken van:
+
 - **Zod**
 - **Yup**
 - **TanStack Forms**
@@ -62,6 +65,7 @@ Voor formuliervalidatie zou je gebruik kunnen maken van:
 Om je begrip van implementatie en containerisatie te tonen, kun je **je project containeriseren** met **Docker**.
 
 ### Vereisten:
+
 - Er is **geen officiële Docker image** voor PocketBase, dus je moet **de documentatie zorgvuldig lezen** en je eigen **Dockerfile** maken.
 - De frontend moet ook worden containerized met een eigen **Dockerfile**.
 - Optioneel kun je een **docker-compose.yml** bestand toevoegen om beide services te beheren.
