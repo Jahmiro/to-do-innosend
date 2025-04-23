@@ -7,7 +7,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getTodos } from "@/lib/api/todos";
-import { Button } from "./ui/button";
 import { DeleteTodoButton } from "./DeleteTodoButton";
 
 export default async function ToDoTable() {
@@ -30,7 +29,10 @@ export default async function ToDoTable() {
               {todo.description}
             </TableCell>
             <TableCell>{todo.completed === false ? "Open" : "Done"}</TableCell>
-            <TableCell className="text-right"><DeleteTodoButton id={todo.id} /></TableCell>
+            <TableCell className="text-right grid grid-cols-2 gap-2">
+              <DeleteTodoButton id={todo.id} />
+              <DeleteTodoButton id={todo.id} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

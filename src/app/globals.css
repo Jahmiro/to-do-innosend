@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --color-brand-50:  #f0fdf4;
+  /* Brand scale */
+  --color-brand-50: #f0fdf4;
   --color-brand-100: #dcfce7;
   --color-brand-200: #bbf7d0;
   --color-brand-300: #86efac;
@@ -12,38 +13,42 @@
   --color-brand-800: #166534;
   --color-brand-900: #14532d;
 
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-}
+  /* Theming (tailwind-friendly) */
+  --color-primary: var(--color-brand-600);
+  --color-primary-foreground: white;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-secondary: var(--color-brand-100);
+  --color-secondary-foreground: var(--color-brand-800);
 
-  --color-brand-50: var(--color-brand-50);
-  --color-brand-100: var(--color-brand-100);
-  --color-brand-200: var(--color-brand-200);
-  --color-brand-300: var(--color-brand-300);
-  --color-brand-400: var(--color-brand-400);
-  --color-brand-500: var(--color-brand-500);
-  --color-brand-600: var(--color-brand-600);
-  --color-brand-700: var(--color-brand-700);
-  --color-brand-800: var(--color-brand-800);
-  --color-brand-900: var(--color-brand-900);
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: white;
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0a;
+
+  --color-ring: var(--color-brand-500);
+
+  --font-sans: var(--font-geist-sans, system-ui, sans-serif);
+  --font-mono: var(--font-geist-mono, monospace);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: 222 47% 11%;
-    --foreground: #ededed;
+    --color-background: hsl(222, 47%, 11%);
+    --color-foreground: #ededed;
+
+    --color-primary: var(--color-brand-400);
+    --color-primary-foreground: #000;
+
+    --color-secondary: var(--color-brand-800);
+    --color-secondary-foreground: #fff;
+
+    --color-ring: var(--color-brand-300);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
 }

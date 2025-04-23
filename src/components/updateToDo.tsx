@@ -17,12 +17,12 @@ type Props = {
   id: string;
 };
 
-export function DeleteTodoButton({ id }: Props) {
+export function UpdateTodoButton({ id }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleDelete = async () => {
+  const handleUpdate = async () => {
     setLoading(true);
     try {
       await deleteTodo(id);
@@ -38,7 +38,7 @@ export function DeleteTodoButton({ id }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="destructive">Delete</Button>
+        <Button variant="outline">Delete</Button>
       </DialogTrigger>
 
       <DialogContent className="bg-gray-900">
@@ -54,10 +54,11 @@ export function DeleteTodoButton({ id }: Props) {
           </Button>
           <Button
             variant="destructive"
-            onClick={handleDelete}
+            onClick={handleUpdate}
             disabled={loading}
+            className="hover:border-amber-200"
           >
-            {loading ? "Verwijderen..." : "Verwijder"}
+            {loading ? "update..." : "Update"}
           </Button>
         </DialogFooter>
       </DialogContent>

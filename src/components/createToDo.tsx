@@ -1,34 +1,34 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { createTodo } from '@/lib/api/todos'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { createTodo } from "@/lib/api/todos";
 
 export function CreateToDo() {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!title) return
+    e.preventDefault();
+    if (!title) return;
 
-    setLoading(true)
+    setLoading(true);
     try {
-      await createTodo({ title, description })
-      setTitle('')
-      setDescription('')
-      router.refresh()
+      await createTodo({ title, description });
+      setTitle("");
+      setDescription("");
+      router.refresh();
     } catch (error) {
-      console.error('error:', error)
+      console.error("error:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <form
@@ -53,14 +53,10 @@ export function CreateToDo() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <Button
-          type="submit"
-          className={buttonVariants({ variant: 'outline' })}
-          disabled={loading}
-        >
-          {loading ? 'Creating...' : 'Send'}
+        <Button type="submit" variant="default" disabled={loading}>
+          {loading ? "Creating..." : "Send"}
         </Button>
       </div>
     </form>
-  )
+  );
 }
